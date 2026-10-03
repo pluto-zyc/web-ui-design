@@ -1,0 +1,9 @@
+manifestVersion: 1
+skill:
+  name: UI-Design-Skill
+  version: unknown
+uiAssetSchemaVersion: 1
+projectMode: unknown # admin | visualization | hybrid
+defaultTheme: unknown # admin | visualization
+componentLibraries: [] # Read from the real frontend package manifest.
+themeProfiles: {} # Record real, isolated project themes and their owners.

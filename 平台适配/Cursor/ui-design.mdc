@@ -1,19 +1,19 @@
 ---
-description: UI Design Skill：根据参考图建立 Page Schema，复用项目 Design Token 与 Component Registry，并通过截图验证页面。
+description: UI Design Skill v0.5.0：先读取项目版本化 UI 资产，按项目类型隔离主题，优先复用组件库与已登记包装组件，并进行视觉验证。
 alwaysApply: false
 ---
 
-# UI Design Skill
+# UI Design Skill v0.5.0
 
 执行 UI 页面任务时：
 
-1. 优先读取项目 `ui-design/design-token.yaml` 与 `ui-design/component-registry.yaml`。
-2. 新页面先分析 Layout / Main / Section / Component。
-3. 生成或更新 `ui-design/page-schema/` 中对应页面的 Schema。
-4. 优先复用已有组件。
-5. 优先使用已有 Design Token。
-6. Schema 与组件映射确认后再写代码。
-7. 完成后使用项目可用的预览/截图方式进行视觉验证。
-8. 发现偏差时先修正结构、组件和 Token，再调整局部 CSS。
+1. 读取 `ui-design/manifest.yaml`（若存在），识别 Skill 版本、资产格式版本、项目 profile 和默认主题。
+2. 优先保留并读取现有 Design Token、Component Registry 和目标 Page Schema。Skill 升级不触发资产或代码重写。
+3. 检查前端项目实际安装的组件库和图标库；优先映射项目包装组件，再用库组件和 Token。
+4. 后台、可视化、混合项目按项目登记的主题边界复用组件，不跨 profile 全局覆盖样式。
+5. 新页面先分析结构并创建或增量更新 Page Schema，再实现代码。
+6. 默认遵循项目共享组件主题；用户明确要求参考图高保真或主题变更时才建立受限变体。
+7. 为需要复用的图标优先查找源素材或项目图标库；根据任务读取图标资产规则。
+8. 完成后预览验证结构、组件、主题、弹层、状态、图标和响应式布局。
 
-详细规则按需读取 `.cursor/skills/ui-design/参考资料/`。
+详细规则按需读取 `.cursor/skills/ui-design/参考资料/` 中的相关文件。

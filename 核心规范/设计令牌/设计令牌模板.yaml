@@ -1,5 +1,10 @@
 # 项目级 Design Token 模板
-# 第一次接入项目时，应优先从真实项目代码中提取，不要凭空填写。
+# 接入或更新 Token 时优先使用项目源码的可验证值，不要凭空填写。
+version: 1
+project_mode: unknown
+theme_profiles:
+  admin: {}
+  visualization: {}
 colors:
   primary: ""
   background: ""

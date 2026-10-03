@@ -1,94 +1,50 @@
-# UI-Design-Skill v0.3.0
+# UI-Design-Skill v0.5.0
 
-> 让 AI 按照项目既有 UI 系统，从参考图稳定地产生一致的前端页面。
+> 将项目既有组件库、UI 资产和项目类型纳入参考图页面开发流程，持续维护一致的页面与组件系统。
 
-## 核心流程
+## 工作流程
 
 ```text
-参考图 / 页面需求
-      ↓
-AI 分析页面结构
-      ↓
-生成 Page Schema
-      ↓
-读取项目 Design Token
-      ↓
-读取 Component Registry
-      ↓
-优先复用已有组件
-      ↓
-生成代码
-      ↓
-截图 / 预览验证
-      ↓
-修正结构、组件、Token 与视觉偏差
+读取 Skill / UI 资产版本
+        ↓
+扫描前端项目、组件库、图标库与主题
+        ↓
+读取项目 profile、Design Token、Component Registry
+        ↓
+参考图分析 → Page Schema
+        ↓
+映射组件库 / 项目包装组件 / 图标
+        ↓
+实现 → 浏览器视觉验证 → 修正
 ```
 
-## v0.3 的关键变化
+## v0.5.0
 
-v0.2 主要是一套行为规范；v0.3 增加了**项目级 UI Manifest** 的概念。
+- 检测并优先使用项目已安装的组件库及符合当前 Profile 的项目包装组件，避免重复手写常规控件。
+- 增加视口根布局适配规则：先明确根容器尺寸、固定区域、剩余内容区及滚动责任，再实现页面。
+- 视觉验证覆盖窄/矮视口、文档级意外溢出和表格内部横向滚动。
+- 以持续项目开发与增量维护为默认工作方式，升级 Skill 不会触发资产或代码重写。
+- 项目 manifest 记录 Skill release、UI 资产格式版本、项目模式与默认主题。
+- 支持 `admin`、`visualization`、`hybrid` profile，并隔离后台和可视化主题。
+- 为 Element Plus 等共享库明确主题变量、局部作用域与弹层隔离边界。
+- 补充 BaseTable 等共享组件的复用边界、Element Plus 主题变量和弹层隔离规则。
+- 补充图标源素材、图标库、SVG 与截图裁切的选择策略。
+- 提供 Cursor 与 Codex 平台安装和升级指引。
 
-一个具体项目第一次接入后，可以在项目内维护：
+## 项目长期资产
 
 ```text
 ui-design/
+├── manifest.yaml
 ├── design-token.yaml
 ├── component-registry.yaml
 └── page-schema/
-    ├── dashboard.yaml
-    └── ...
 ```
 
-其中：
+`manifest.yaml` 记录 Skill 与资产格式版本。其它资产由项目持有。安装 Skill 只更新平台入口文件，不覆盖项目级 `ui-design/` 内容。
 
-- `design-token.yaml`：项目长期复用的颜色、间距、圆角、字体、阴影等。
-- `component-registry.yaml`：项目已有组件及其使用约束。
-- `page-schema/*.yaml`：每个页面的结构中间表示，由参考图/需求分析得到。
+## 接入与升级
 
-**不要为每个新页面重新创建 Design Token 和 Component Registry。** 新页面主要产生自己的 Page Schema，并复用已有项目 UI 系统。
+按 `使用手册.md` 安装。已有项目升级时，检查当前资产并按需迁移；只更新 Skill 规则时不必重新生成页面。
 
-
-## 第一次使用
-
-如果你是第一次从 GitHub 下载本项目，**先打开根目录的 `使用手册.md`**。
-
-它会从安装开始，带你完整走通：
-
-```text
-安装到 Cursor
-    ↓
-分析已有项目 UI
-    ↓
-建立 Design Token + Component Registry
-    ↓
-提供第一张参考图
-    ↓
-生成 Page Schema
-    ↓
-验收 Schema
-    ↓
-生成代码
-    ↓
-截图验证
-    ↓
-修正并完成第一个页面
-```
-
-第一次走通以后，再查看 `文档/` 下的其他说明即可。
-
-## Cursor 实验
-
-最简单的实验方式：
-
-1. 打开一个真实前端项目。
-2. 将本仓库的 `技能/ui-design/` 安装到 `.cursor/skills/ui-design/`。
-3. 将 `核心规范/` 复制到项目中的 `ui-design/模板/` 或作为项目规范参考。
-4. 在 Cursor 中给 AI 一张参考图。
-5. 明确要求先分析并生成 Page Schema，再编码。
-6. 让 AI 截图检查并修正。
-
-详细步骤见 `文档/Cursor首个项目实验.md`。
-
-## 当前定位
-
-v0.3 仍然是**AI Agent 的规范与中间层**，不是自动视觉回归引擎，也不是编译器。它通过结构化文件和明确流程提高不同 Agent、不同页面之间的一致性。
+详细策略见 `技能/ui-design/SKILL.md` 和 `技能/ui-design/参考资料/`。Cursor 接入指引见 `文档/Cursor项目接入与迭代.md`。

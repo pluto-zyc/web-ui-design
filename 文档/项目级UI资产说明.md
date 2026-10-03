@@ -8,16 +8,17 @@
 
 ```text
 ui-design/
+├── manifest.yaml
 ├── design-token.yaml
 ├── component-registry.yaml
 └── page-schema/
 ```
 
-这些内容应随项目维护。
+这些内容应随项目维护。`manifest.yaml` 记录 Skill 版本、UI 资产格式版本、项目类型、默认主题和组件库信息。
 
 ## 是否每个项目都要手工创建？
 
-不需要。第一次接入项目时，可以让 AI 从现有代码、组件、主题、CSS 变量和原型中整理出来。之后随着项目演进再维护。
+不需要。首次接入时可让 AI 从现有代码、组件、主题、CSS 变量和原型中整理。之后按需增量维护，Skill 升级不自动重新生成这些资产。
 
 ## Page Schema 是否每页都需要？
 
@@ -26,13 +27,13 @@ ui-design/
 ## 一个新项目的初始化顺序
 
 ```text
-现有项目代码 / 设计稿
+现有项目代码 / 组件库 / 设计稿
        ↓
-初始化 Design Token
+读取 manifest、确定项目 profile 与资产版本
        ↓
-初始化 Component Registry
+缺失时初始化 Design Token / Component Registry
        ↓
-新页面 → Page Schema
+新页面 → Page Schema → 组件库 / 注册包装组件映射
        ↓
 代码
        ↓

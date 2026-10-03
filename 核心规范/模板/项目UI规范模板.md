@@ -4,10 +4,13 @@
 
 ## 资产
 
+- `ui-design/manifest.yaml`
 - `ui-design/design-token.yaml`
 - `ui-design/component-registry.yaml`
 - `ui-design/page-schema/`
 
-## 优先级
+## 项目模式与优先级
 
-项目已有 Design System > 项目已有组件 > 项目已有页面模式 > UI Design Skill 默认规则 > 参考图临时细节 > AI 自行发挥。
+项目应声明 `admin`、`visualization` 或 `hybrid` 模式，并为混合项目分别登记组件和主题边界。
+
+明确页面要求 > 项目 profile / Design System > 项目组件 > 现有页面模式 > 参考图局部细节 > Skill 默认规则。
