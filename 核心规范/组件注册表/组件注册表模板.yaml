@@ -1,0 +1,15 @@
+# 项目级 Component Registry 模板
+# 只登记项目中真实存在或经过确认的新组件。
+components:
+  - name: "Button"
+    source: ""
+    purpose: ""
+    variants: []
+    allowed_usage: []
+    forbidden_usage: []
+  - name: "Card"
+    source: ""
+    purpose: ""
+    variants: []
+    allowed_usage: []
+    forbidden_usage: []

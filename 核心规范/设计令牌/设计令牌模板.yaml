@@ -1,0 +1,25 @@
+# 项目级 Design Token 模板
+# 第一次接入项目时，应优先从真实项目代码中提取，不要凭空填写。
+colors:
+  primary: ""
+  background: ""
+  surface: ""
+  text: ""
+  text_muted: ""
+  border: ""
+  success: ""
+  warning: ""
+  danger: ""
+spacing:
+  unit: ""
+  values: []
+radius:
+  sm: ""
+  md: ""
+  lg: ""
+typography:
+  font_family: ""
+  sizes: {}
+  weights: {}
+shadow: {}
+breakpoints: {}

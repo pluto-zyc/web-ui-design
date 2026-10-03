@@ -1,0 +1,15 @@
+# 页面级 Page Schema 模板
+page:
+  name: ""
+  route: ""
+  reference: ""
+layout:
+  type: ""
+main:
+  - type: "page-header"
+    component: ""
+  - type: "section"
+    children: []
+validation:
+  reference_match_notes: []
+  unresolved_visual_questions: []
