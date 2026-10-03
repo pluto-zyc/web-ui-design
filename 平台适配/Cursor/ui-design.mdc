@@ -1,9 +1,9 @@
 ---
-description: UI Design Skill v0.5.0：先读取项目版本化 UI 资产，按项目类型隔离主题，优先复用组件库与已登记包装组件，并进行视觉验证。
+description: UI Design Skill v0.6.0：先读取项目版本化 UI 资产，按项目类型隔离主题，优先复用组件库与已登记包装组件，并进行视觉验证。
 alwaysApply: false
 ---
 
-# UI Design Skill v0.5.0
+# UI Design Skill v0.6.0
 
 执行 UI 页面任务时：
 

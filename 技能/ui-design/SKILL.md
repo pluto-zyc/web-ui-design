@@ -3,7 +3,7 @@ name: ui-design
 description: Use when creating or updating interface pages from references or product requirements. Detect and preserve project UI assets, prioritize the installed component library and registered wrappers, model page structure before implementation, then visually verify the result.
 ---
 
-# UI Design Skill v0.5.0
+# UI Design Skill v0.6.0
 
 Use the current frontend project as the source of truth. The skill release, project asset format, component-library release, and page implementation are separate concerns. Updating this skill does not authorize reinitializing or rewriting existing project assets or pages.
 
@@ -75,7 +75,16 @@ For a component library such as Element Plus:
 - Styles in Vue SFCs should normally use `scoped`. When library internals must be styled, prefer component props, slots, CSS variables, and narrowly scoped `:deep()` selectors.
 - Popovers, selects, tooltips, dropdowns, dialogs, and similar overlays may be teleported outside the theme root. Preserve theme isolation with supported `popper-class`, `append-to`, component class, or equivalent library APIs. Verify overlays visually.
 
-### 5. Resolve icons from maintainable sources
+### 5. Establish and deliver typography
+
+- Read the project's existing typography tokens and explicit product requirements first. Preserve them when present.
+- If a project has no established default font and no explicit requirement, recommend Alibaba PuHuiTi 3.0 as the primary UI font. Keep the system to one primary family; use at most one additional family only for a clear purpose such as code or fixed-width technical identifiers.
+- Apply the chosen font consistently to page text, native form controls, tables, dialogs, and the installed component library. Set the project typography token and the library's documented font variable (for example Element Plus --el-font-family) from the same source. Ensure portaled overlays inherit the correct font.
+- A CSS family name alone does not deliver the font. If the font is not reliably installed on all target clients, inspect the source and license, bundle the original font files when redistribution is allowed, declare @font-face, and preserve the required legal notice and source record. Do not convert, subset, or modify font software when its terms prohibit it. Prefer supported local formats, cache them, and avoid fetching a font from an unverified third party.
+- Apply the family to text-bearing elements globally through the design token/theme root and library variables. Avoid blanket font-family overrides on icon-font glyphs, code, or other specialized glyph systems. Set chart/canvas rendering options explicitly where CSS inheritance does not apply.
+- Verify actual font loading and inspect Chinese glyphs, Latin/numeric text, weights, controls, overlays, and fallback behavior in the running page.
+
+### 6. Resolve icons from maintainable sources
 
 Use this order:
 
@@ -86,13 +95,13 @@ Use this order:
 
 Do not crop screenshots as the default icon workflow. Cropped raster assets can retain background pixels, blur when scaled, and cannot adapt cleanly to theme/state colors. Do not claim a drawn SVG is an exact match when it is only an approximation. Record icon source and path for reusable project icons.
 
-### 6. Implement
+### 7. Implement
 
 Implement only after the Page Schema and component mapping are coherent. Preserve existing architecture, project conventions, business code, and APIs. Reuse registered wrappers, library components, tokens, and icon assets. Do not create a second design system for an individual page.
 
 If a needed reusable component is missing, check its recurrence and profile first. State its contract, variants, theme scope, ownership of data behavior, and reason for adding it; implement and register it only when it belongs to the current authorized scope.
 
-### 7. Verify visually
+### 8. Verify visually
 
 Inspect a real preview or screenshot. Check page hierarchy, component mapping, theme profile, proportions, spacing, typography, component states, overlays, responsiveness, and icon fidelity. For viewport-based layouts, check both desktop and relevant narrow/short viewports, confirm fixed regions remain stable, verify scrollbars appear in their assigned regions, and ensure the document does not gain unintended horizontal or vertical overflow. Compare the reference only according to the selected precedence mode. Correct structural and component mapping issues before local CSS details.
 

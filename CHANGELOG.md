@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.0
+
+- Added a project-wide typography default: recommend Alibaba PuHuiTi 3.0 when no font is specified.
+- Added consistent theme-token and Element Plus font-variable mapping for controls and overlays.
+- Added font delivery, license/source retention, icon-font protection, and runtime font-loading checks.
+
+
 ## v0.5.0
 
 - Clarified that installed component libraries and profile-matched project wrappers take priority for standard controls.
