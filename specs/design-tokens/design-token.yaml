@@ -1,0 +1,32 @@
+# Project-level Design Token template
+# When onboarding or updating tokens, prefer values that can be verified in project source. Do not invent them.
+version: 1
+project_mode: unknown
+theme_profiles:
+  admin: {}
+  visualization: {}
+colors:
+  primary: ""
+  background: ""
+  surface: ""
+  text: ""
+  text_muted: ""
+  border: ""
+  success: ""
+  warning: ""
+  danger: ""
+spacing:
+  unit: ""
+  values: []
+radius:
+  sm: ""
+  md: ""
+  lg: ""
+typography:
+  # When the project does not specify a typeface, recommend Alibaba PuHuiTi 3.0 as the primary font.
+  font_family: "'Alibaba PuHuiTi 3.0', 'Microsoft YaHei', sans-serif"
+  font_family: ""
+  sizes: {}
+  weights: {}
+shadow: {}
+breakpoints: {}

@@ -1,13 +1,13 @@
-# UI Design Skill 项目说明
+# UI Design Skill
 
-本项目用于定义跨 AI Agent 的 UI 生成规范。
+This repository defines UI generation rules shared across AI agents.
 
-核心原则：
+Core principles:
 
-- 通用 Skill 与项目 UI 资产分离。
-- 项目已有 Design System 优先。
-- 新页面先 Page Schema，再代码。
-- 优先复用 Component Registry。
-- 优先使用 Design Token。
-- 完成后进行截图/预览验证。
-- 平台适配互相隔离。
+- Keep the generic skill separate from project UI assets.
+- Prefer the project's existing design system.
+- For a new page, write the Page Schema before code.
+- Prefer components already listed in the Component Registry.
+- Prefer Design Tokens.
+- Verify the finished page with a screenshot or preview.
+- Keep platform adapters isolated from one another.

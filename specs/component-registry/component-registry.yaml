@@ -1,0 +1,19 @@
+# Project-level Component Registry template
+# Register only components that really exist in the project, or new components that have been confirmed. Record the profile and the actual status.
+version: 1
+projectMode: unknown
+components:
+  - name: "Button"
+    source: ""
+    status: existing # existing | added | planned
+    profile: [admin, visualization]
+    purpose: ""
+    variants: []
+    allowed_usage: []
+    forbidden_usage: []
+  - name: "Card"
+    source: ""
+    purpose: ""
+    variants: []
+    allowed_usage: []
+    forbidden_usage: []

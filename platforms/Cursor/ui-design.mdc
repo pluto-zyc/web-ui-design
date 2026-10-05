@@ -1,0 +1,19 @@
+---
+description: UI Design Skill v0.6.0. Read the project's versioned UI assets first, isolate themes by project profile, prefer the component library and registered wrappers, then verify the result visually.
+alwaysApply: false
+---
+
+# UI Design Skill v0.6.0
+
+When working on a UI page:
+
+1. Read `ui-design/manifest.yaml` when it exists. Identify the skill version, asset schema version, project profile, and default theme.
+2. Prefer to keep and read the existing Design Tokens, Component Registry, and target Page Schema. A skill upgrade does not rewrite assets or code.
+3. Inspect the component library and icon library actually installed in the frontend project. Map project wrappers first, then library components and tokens.
+4. Reuse components inside the theme boundary registered for admin, visualization, or hybrid projects. Do not apply styles from one profile globally to another.
+5. For a new page, analyze the structure and create or incrementally update the Page Schema before writing code.
+6. Follow the shared project component theme by default. Create a constrained variant only when the user explicitly asks for reference fidelity or a theme change.
+7. For icons that will be reused, look for source assets or the project icon library first. Read the icon asset rules when the task needs them.
+8. After implementation, preview and verify structure, components, theme, overlays, states, icons, and responsive layout.
+
+Read the relevant files in `.cursor/skills/ui-design/references/` when a decision needs the detailed rules.
