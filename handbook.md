@@ -30,6 +30,8 @@ project/
 
 `ui-design/` may follow the project's real layout. The agent should locate the frontend root first, then read UI assets from the shared project root.
 
+WorkBuddy Desktop manages its imported skill in the app's Skills page; it does not add a project-local install directory.
+
 ## 2. Install or update the skill
 
 The PowerShell working directory must be the project root. Use the install scripts in this repository:
@@ -41,6 +43,8 @@ cd "D:\Projects\my-project"
 ```
 
 The scripts copy only the skill and rule files for the selected platform. They do not create or change the project's `ui-design/` assets, and they do not change application code.
+
+For WorkBuddy Desktop, package `skills/ui-design/` as a ZIP and import it from **专家 · 技能 · 连接器** → **技能** → **添加技能** → **上传技能**. See [`platforms/WorkBuddy/install.md`](platforms/WorkBuddy/install.md). The import is managed in WorkBuddy; it does not use the Codex or Cursor install scripts.
 
 After an update, confirm:
 

@@ -34,7 +34,7 @@ Implement → verify visually in the browser → correct
 - For shared libraries such as Element Plus, define theme variables, local scope, and overlay isolation boundaries.
 - Add reuse boundaries for shared components such as BaseTable, plus Element Plus theme variables and overlay isolation rules.
 - Add a selection strategy for icon source files, icon libraries, SVG, and crops taken from screenshots.
-- Provide install and upgrade guidance for Cursor and Codex.
+- Provide install and upgrade guidance for Cursor, Codex, and WorkBuddy Desktop.
 
 ## Long-lived project assets
 

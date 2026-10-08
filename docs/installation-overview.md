@@ -22,7 +22,11 @@ cd "project-root"
 
 Installs `.claude/skills/ui-design/`. Copy `skills/ui-design/` into the matching project path.
 
-## Workbody and other assistants
+## WorkBuddy Desktop
+
+Package `skills/ui-design/` as a ZIP, then in WorkBuddy open **专家 · 技能 · 连接器** → **技能** → **添加技能** → **上传技能** and select the ZIP. The archive should contain the `ui-design/` skill folder, including `SKILL.md`, `VERSION`, and its `references/` files. See [`platforms/WorkBuddy/install.md`](../platforms/WorkBuddy/install.md) for the full steps.
+
+## Other assistants
 
 Copy `skills/ui-design/` into the workspace specification directory, and tell the assistant to read `SKILL.md`. Platform entry points stay independent of one another. Project UI assets stay in the project's shared `ui-design/` directory.
 
