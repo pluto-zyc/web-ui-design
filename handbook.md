@@ -1,18 +1,18 @@
-# UI-Design-Skill v0.6.0 Handbook
+# UI-Design-Skill v0.6.0 手册
 
-This handbook covers onboarding and ongoing maintenance of a real project. Upgrading the skill, upgrading the asset schema, and implementing a page are separate operations. None of them triggers the others automatically.
+本手册说明如何把技能接入真实项目，以及如何持续维护。升级技能、升级资产结构、实现页面是三件独立的事，任何一件都不会自动触发另外两件。
 
-## 1. Layers and versions
+## 1. 分层与版本
 
-The generic skill owns the workflow. Project assets own that project's themes, components, and pages. The frontend package manifest owns component-library versions.
+通用技能负责工作流。项目资产负责该项目的主题、组件和页面。前端包清单负责组件库版本。
 
-| Version | Maintained in | Meaning |
+| 版本 | 维护位置 | 含义 |
 |---|---|---|
-| Skill release | `skills/ui-design/VERSION` | Generic rule version, for example `0.6.0` |
-| UI asset schema | `ui-design/manifest.yaml` | Project asset structure version, for example `1` |
-| Component library | Frontend `package.json` | Dependency versions such as Element Plus |
+| Skill 发布版本 | `skills/ui-design/VERSION` | 通用规则版本，例如 `0.6.0` |
+| UI 资产结构 | `ui-design/manifest.yaml` | 项目资产结构版本，例如 `1` |
+| 组件库 | 前端 `package.json` | 依赖版本，例如 Element Plus |
 
-Recommended project layout:
+推荐的项目布局：
 
 ```text
 project/
@@ -28,13 +28,13 @@ project/
 └── front_end/                      # Example frontend directory
 ```
 
-`ui-design/` may follow the project's real layout. The agent should locate the frontend root first, then read UI assets from the shared project root.
+`ui-design/` 可以按项目的真实目录来放。代理应先定位前端根目录，再从共享的项目根目录读取 UI 资产。
 
-WorkBuddy Desktop manages its imported skill in the app's Skills page; it does not add a project-local install directory.
+WorkBuddy Desktop 在应用的「技能」页面管理已导入的技能，不会在项目内新增安装目录。
 
-## 2. Install or update the skill
+## 2. 安装或更新技能
 
-The PowerShell working directory must be the project root. Use the install scripts in this repository:
+PowerShell 的工作目录必须是项目根目录。使用本仓库中的安装脚本：
 
 ```powershell
 cd "D:\Projects\my-project"
@@ -42,11 +42,11 @@ cd "D:\Projects\my-project"
 & "D:\Tools\UI-Design-Skill\scripts\install-codex.ps1"
 ```
 
-The scripts copy only the skill and rule files for the selected platform. They do not create or change the project's `ui-design/` assets, and they do not change application code.
+脚本只复制所选平台的技能和规则文件。它们不会创建或修改项目的 `ui-design/` 资产，也不会修改应用代码。
 
-For WorkBuddy Desktop, package `skills/ui-design/` as a ZIP and import it from **专家 · 技能 · 连接器** → **技能** → **添加技能** → **上传技能**. See [`platforms/WorkBuddy/install.md`](platforms/WorkBuddy/install.md). The import is managed in WorkBuddy; it does not use the Codex or Cursor install scripts.
+WorkBuddy Desktop 请将 `skills/ui-design/` 打包为 ZIP，从 **专家 · 技能 · 连接器** → **技能** → **添加技能** → **上传技能** 导入。参见 [`platforms/WorkBuddy/install.md`](platforms/WorkBuddy/install.md)。导入由 WorkBuddy 管理，不使用 Codex 或 Cursor 的安装脚本。
 
-After an update, confirm:
+更新后请确认：
 
 ```powershell
 Get-Content .agents\skills\ui-design\VERSION
@@ -54,101 +54,101 @@ Get-Content .cursor\skills\ui-design\VERSION
 Get-Content ui-design\manifest.yaml
 ```
 
-The two skill versions must match. The Cursor and Codex entry points must point at the same skill release. The project asset version is maintained separately.
+两处技能版本必须一致。Cursor 与 Codex 的入口必须指向同一技能发布版本。项目资产版本单独维护。
 
-For an existing project, the install scripts do not modify the manifest. After confirming that both newly installed `VERSION` files are the expected release, update only `skill.version` in `ui-design/manifest.yaml`. Leave the rest of the project assets unchanged. If the schema format also changed, update `uiAssetSchemaVersion` according to the migration notes.
+对于已有项目，安装脚本不会修改 manifest。确认两处新安装的 `VERSION` 都是预期发布版本后，只更新 `ui-design/manifest.yaml` 中的 `skill.version`。其余项目资产保持不变。如果结构格式也变了，再按迁移说明更新 `uiAssetSchemaVersion`。
 
-## 3. Onboard or upgrade an existing project
+## 3. 接入或升级已有项目
 
-Ask the agent to inspect the current state first:
-
-```text
-Use the UI Design Skill in this project. First inspect the skill version, ui-design/manifest.yaml, the existing Design Tokens, Component Registry, Page Schemas, frontend dependencies, and the actual source. Do not reinitialize existing assets and do not rewrite existing application pages. Report the current project mode, component library, theme boundaries, asset schema version, and any compatible migration that is required. Apply only incremental asset migrations that are authorized and necessary.
-```
-
-Rules:
-
-- If the manifest or long-lived assets already exist, read and keep them. Add only the information that is missing.
-- If an asset file has no version field, read it as the compatible legacy format described in the migration notes. Do not rewrite it only to add a version.
-- If a new release only adds workflow rules, update the skill. Existing pages do not need to be rebuilt.
-- If the asset schema actually changed, explain the impact first, preserve unknown fields and user-authored content, then run an idempotent migration.
-- Get explicit approval before changing a global theme, deleting asset fields, or rewriting pages in bulk.
-
-## 4. Project mode and themes
-
-Record the actual project mode in `ui-design/manifest.yaml`:
-
-- `admin`: an administrative console is the default visual language.
-- `visualization`: large-screen, map, or monitoring visualization is the default visual language.
-- `hybrid`: admin and visualization coexist. Register the two component sets and themes separately.
-
-Do not infer the mode from the project name alone. Scan routes, pages, UI libraries, and existing styles. If the evidence is insufficient, ask the project owner.
-
-A hybrid project may share Element Plus behavior underneath, but lists, forms, menus, and overlays use the wrapper and theme root of their own profile. Overlay components may be teleported to `body`. Connect their theme through a public interface such as a component class or an append target.
-
-## 5. Initialize missing project UI assets
-
-Initialize assets only when the manifest or an asset file is actually missing. Scan the real project:
-
-1. Tech stack and frontend root.
-2. Installed component libraries, icon libraries, and theme entry points.
-3. CSS, SCSS, CSS Modules, Tailwind, global variables, and Design Tokens.
-4. Layouts, page patterns, and components that are already reused.
-5. Admin and visualization profiles, and the boundary between their themes.
-
-Register only real components and tokens that can be verified. Mark unknown fields as `unknown`. Label planned components separately from implemented ones. Initializing UI assets does not by itself require changing application code.
-
-## 6. Prefer the component library and shared wrappers
-
-Read the Component Registry and the source before choosing a control:
-
-1. An existing project wrapper for the current profile.
-2. An installed component-library control, with the project's theme defaults.
-3. A composable project primitive.
-4. A new shared wrapper when the pattern is stable across pages, or when the user asks for one.
-5. A page-local implementation for a structure that is unique to that page.
-
-When the project uses Element Plus, prefer reuse for common forms, inputs, selects and tree selects, buttons, tables, pagination, menus, dialogs, and feedback. Element Plus supports global or local CSS variables and SCSS theme variables. In a hybrid project, limit the scope of those variables. Do not let one page's styles override every `.el-*` component globally.
-
-A shared table such as `BaseTable` should define its theme, column configuration, selection, pagination, loading, empty state, and slots. A default page reuses that visual treatment. The Page Schema still lists the concrete fields, columns, actions, and data states. The table component owns presentation and interaction. The page or data layer owns the API.
-
-Create a wrapper only when it provides stable defaults, a business constraint, theme isolation, or reuse across pages. Keep the API composable. Do not build an overly generic component for a single page.
-
-### Default relationship between a reference and project consistency
-
-Shared components render with the theme registered for the project. The reference determines overall layout, information, and content relationships. If a reference list looks different from `BaseTable`, keep the `BaseTable` treatment. Use a named variant or a page theme only when the user explicitly asks for reference fidelity on the current page, or asks to change the global or local list theme.
-
-## 7. Choosing icons
-
-Look for design source files or the project icon library first. Next, choose a close icon from an icon library. Draw an SVG for a simple icon that must scale or take a theme color. Crop a PNG from a prototype screenshot only when no source asset exists, the exact shape matters, and the icon is small and used at a fixed size. Record the semantic name, source, and path of reusable icons. Do not treat cropped screenshots as the default icon system.
-
-## 8. Workflow for a new page
-
-Give the agent the requirements and the reference, and ask for a page analysis first:
+先让代理检查当前状态：
 
 ```text
-Use the UI Design Skill. Analyze the reference and implement the page.
-First read the project manifest, Design Tokens, Component Registry, related Page Schemas, and the component-library and icon rules. Preserve those existing assets.
-From the project profile, analyze Layout, Main, Section, Grid, Form, and Table. Decide whether the page is viewport-locked or content-driven. If it is viewport-locked, define the root size, fixed regions, and remaining content area, and name which region owns vertical scrolling and which owns horizontal scrolling. Check the minimum size of Grid and Flex children so they do not unexpectedly stretch the document. Record important sizes and scroll ownership in layout.sizing under ui-design/page-schema/. Then map reusable components, themes, and icons.
-Keep the registered shared-component theme by default. If a local style in the reference conflicts with it, record the conflict and follow the project theme. Create a constrained variant only when I explicitly ask for high-fidelity reproduction.
-Implement the page only after the schema is confirmed. Prefer project wrappers and the component library. Do not reimplement the visual treatment of a registered component, and do not put data requests inside a generic UI component.
-After implementation, preview the page in a browser. Screenshot and correct layout, components, theme states, overlays, icons, and responsive behavior. For a viewport layout, check at least desktop, the target narrow width, and a short viewport. Confirm that the header stays fixed, the content region scrolls, a wide table scrolls horizontally inside itself, and the document does not overflow unexpectedly.
+使用本项目中的 UI Design Skill。先检查技能版本、ui-design/manifest.yaml、已有的 Design Tokens、Component Registry、Page Schemas、前端依赖，以及实际源码。不要重新初始化已有资产，也不要改写已有应用页面。报告当前项目模式、组件库、主题边界、资产结构版本，以及需要的兼容迁移。只执行已授权且必要的增量资产迁移。
 ```
 
-If the user asks for a structure review first, generate only the schema and wait for approval before writing code.
+规则：
 
-## 9. Visual checks
+- 如果 manifest 或长期资产已经存在，读取并保留。只补充缺失的信息。
+- 如果资产文件没有版本字段，按迁移说明中的兼容旧格式读取。不要仅为了补版本而重写文件。
+- 如果新版本只增加了工作流规则，更新技能即可。已有页面不需要重建。
+- 如果资产结构确实变了，先说明影响，保留未知字段和用户编写的内容，再执行可重复的迁移。
+- 修改全局主题、删除资产字段，或批量改写页面前，必须先得到明确同意。
 
-Check page structure, profile, shared-component usage, table and form states, icon sources, theme variables, dialogs and dropdown overlays, responsive layout, and real data states. Verify against the user's chosen `system-first` or explicit `reference-match` goal. When a screenshot shows a problem, fix structure and component mapping before tokens and local styles.
+## 4. 项目模式与主题
 
-## 10. Responsibilities of project assets
+在 `ui-design/manifest.yaml` 中记录实际的项目模式：
 
-| File | Responsibility |
+- `admin`：管理后台是默认视觉语言。
+- `visualization`：大屏、地图或监控可视化是默认视觉语言。
+- `hybrid`：管理端与可视化并存。两套组件和主题分别登记。
+
+不要只根据项目名称推断模式。应查看路由、页面、UI 库和现有样式。证据不足时，询问项目负责人。
+
+混合项目底层可以共用 Element Plus 的行为，但列表、表单、菜单和浮层使用各自 profile 的封装与主题根。浮层组件可能会传送到 `body`。通过公开接口连接主题，例如组件 class 或挂载目标。
+
+## 5. 补齐缺失的项目 UI 资产
+
+仅当 manifest 或某个资产文件确实缺失时才初始化。扫描真实项目：
+
+1. 技术栈与前端根目录。
+2. 已安装的组件库、图标库和主题入口。
+3. CSS、SCSS、CSS Modules、Tailwind、全局变量和 Design Tokens。
+4. 已复用的布局、页面模式和组件。
+5. 管理端与可视化 profile，以及两者的主题边界。
+
+只登记可以核实的真实组件和 token。未知字段标为 `unknown`。计划中的组件与已实现的组件分开标注。初始化 UI 资产本身不要求修改应用代码。
+
+## 6. 优先使用组件库和共享封装
+
+选择控件前，先读 Component Registry 和源码：
+
+1. 当前 profile 已有的项目封装。
+2. 已安装的组件库控件，并使用项目的主题默认值。
+3. 可组合的项目基础件。
+4. 该模式在多个页面中稳定，或用户明确要求时，再新增共享封装。
+5. 仅属于该页面的结构，做页面内实现。
+
+项目使用 Element Plus 时，常见表单、输入框、选择器与树选择、按钮、表格、分页、菜单、对话框和反馈优先复用。Element Plus 支持全局或局部 CSS 变量，以及 SCSS 主题变量。混合项目中要限制这些变量的作用范围。不要让单个页面的样式全局覆盖所有 `.el-*` 组件。
+
+`BaseTable` 这类共享表格应定义主题、列配置、选择、分页、加载、空状态和插槽。默认页面复用这套视觉处理。Page Schema 仍然列出具体字段、列、操作和数据状态。表格组件负责呈现和交互。页面或数据层负责 API。
+
+只有在需要稳定默认值、业务约束、主题隔离，或跨页面复用时才创建封装。API 保持可组合。不要为单个页面做一个过度通用的组件。
+
+### 参考稿与项目一致性的默认关系
+
+共享组件按项目已登记的主题渲染。参考稿决定整体布局、信息和内容关系。如果参考稿中的列表与 `BaseTable` 外观不同，仍保持 `BaseTable` 的处理。只有当用户明确要求当前页面按参考稿高保真还原，或要求修改全局或局部列表主题时，才使用具名变体或页面主题。
+
+## 7. 选择图标
+
+先查找设计源文件或项目图标库。其次从图标库中选一个接近的图标。需要缩放或跟随主题色的简单图标，绘制 SVG。仅当没有源素材、外形必须精确、且图标较小并固定尺寸使用时，才从原型截图裁切 PNG。可复用图标要记录语义名称、来源和路径。不要把裁切截图当作默认图标体系。
+
+## 8. 新页面工作流
+
+把需求和参考稿交给代理，并先要求做页面分析：
+
+```text
+使用 UI Design Skill。分析参考稿并实现页面。
+先阅读项目 manifest、Design Tokens、Component Registry、相关 Page Schemas，以及组件库和图标规则。保留这些已有资产。
+根据项目 profile，分析 Layout、Main、Section、Grid、Form 和 Table。判断页面是 viewport-locked 还是 content-driven。如果是 viewport-locked，定义根尺寸、固定区域和剩余内容区，并写明哪个区域负责纵向滚动、哪个区域负责横向滚动。检查 Grid 和 Flex 子项的最小尺寸，避免它们意外撑开文档。把重要尺寸和滚动归属记入 ui-design/page-schema/ 下的 layout.sizing。然后映射可复用组件、主题和图标。
+默认保持已登记的共享组件主题。如果参考稿中的局部样式与之冲突，记录冲突并遵循项目主题。只有我明确要求高保真还原时，才创建受约束的变体。
+结构确认后再实现页面。优先使用项目封装和组件库。不要重做已登记组件的视觉处理，也不要把数据请求放进通用 UI 组件。
+实现后在浏览器中预览页面。截图并修正布局、组件、主题状态、浮层、图标和响应式表现。视口布局至少检查桌面、目标窄宽和矮视口。确认顶栏保持固定、内容区滚动、宽表格在自身内部横向滚动，文档不会意外溢出。
+```
+
+如果用户要求先做结构评审，只生成 schema，等确认后再写代码。
+
+## 9. 视觉检查
+
+检查页面结构、profile、共享组件用法、表格和表单状态、图标来源、主题变量、对话框与下拉浮层、响应式布局，以及真实数据状态。按用户选择的 `system-first` 或明确的 `reference-match` 目标核对。截图出现问题时，先修正结构和组件映射，再调整 token 和局部样式。
+
+## 10. 项目资产的职责
+
+| 文件 | 职责 |
 |---|---|
-| `manifest.yaml` | Skill release, asset schema, project mode, and theme / component-library boundaries |
-| `design-token.yaml` | Long-lived visual variables for the project and each profile: color, type, spacing, radius, and similar values |
-| `component-registry.yaml` | Real components, states, purposes, variants, contracts, and theme scope |
-| `page-schema/*.yaml` | One page's structure, columns and fields, interactions, component mapping, icons, and page-level exceptions |
-| Frontend source | Actual component implementations, page code, and backend data integration |
+| `manifest.yaml` | Skill 发布版本、资产结构、项目模式，以及主题 / 组件库边界 |
+| `design-token.yaml` | 项目及各 profile 的长期视觉变量：颜色、字体、间距、圆角等 |
+| `component-registry.yaml` | 真实组件、状态、用途、变体、约定和主题范围 |
+| `page-schema/*.yaml` | 单个页面的结构、列与字段、交互、组件映射、图标，以及页面级例外 |
+| 前端源码 | 实际的组件实现、页面代码，以及后端数据接入 |
 
-Generic skill rules do not override what the project actually implements. A registry path must be verifiable in the code.
+通用技能规则不能覆盖项目的实际实现。登记表中的路径必须能在代码中核对。
