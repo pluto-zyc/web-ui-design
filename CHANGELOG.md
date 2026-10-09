@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.1
+
+- Broadened automatic skill activation to cover all visible UI changes while excluding API- and business-logic-only work.
+- Added project-level Claude Code installers and aligned its update guidance with Codex and Cursor.
+- Fixed the duplicate `typography.font_family` key in the Design Token template.
+
 ## v0.6.0
 
 - Added a project-wide typography default: recommend Alibaba PuHuiTi 3.0 when no font is specified.

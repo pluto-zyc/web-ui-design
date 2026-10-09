@@ -31,6 +31,8 @@ Compress-Archive -Path .\skills\ui-design -DestinationPath .\ui-design-workbuddy
 
 To update it, create a fresh ZIP from the current repository copy and import it through the same flow. Manage or uninstall the imported copy in WorkBuddy's Installed Skills page. Keep project UI assets in the project's own `ui-design/` directory; installing the skill does not initialize or migrate those assets.
 
+For automatic activation on visual tasks, add the short project routing rule from `handbook.md` to the project's `AGENTS.md` when WorkBuddy is used with that file. Otherwise select the imported skill in WorkBuddy when the task is visual.
+
 WorkBuddy may validate additional metadata when importing a package. If import reports missing metadata, follow the current WorkBuddy error guidance for the imported package copy; do not change the generic source skill as part of this installation procedure.
 
 Official references: [WorkBuddy Skills](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market) · [Skill package structure](https://open.workbuddy.cn/docs/skill)

@@ -1,11 +1,11 @@
 ---
-description: UI Design Skill v0.6.0. Read the project's versioned UI assets first, isolate themes by project profile, prefer the component library and registered wrappers, then verify the result visually.
+description: UI Design Skill v0.6.1. Automatically use for visible UI changes including layout, styles, components, forms, tables, charts, menus, dialogs, and responsive behavior. Read project assets and verify visually.
 alwaysApply: false
 ---
 
-# UI Design Skill v0.6.0
+# UI Design Skill v0.6.1
 
-When working on a UI page:
+When creating or changing any user-facing UI, including a page, layout, component appearance, form, table, chart, menu, dialog, or responsive behavior, use this skill even if the user does not name it. Do not load it for API- or business-logic-only changes.
 
 1. Read `ui-design/manifest.yaml` when it exists. Identify the skill version, asset schema version, project profile, and default theme.
 2. Prefer to keep and read the existing Design Tokens, Component Registry, and target Page Schema. A skill upgrade does not rewrite assets or code.

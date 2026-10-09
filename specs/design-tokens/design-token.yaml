@@ -23,8 +23,7 @@ radius:
   md: ""
   lg: ""
 typography:
-  # When the project does not specify a typeface, recommend Alibaba PuHuiTi 3.0 as the primary font.
-  font_family: "'Alibaba PuHuiTi 3.0', 'Microsoft YaHei', sans-serif"
+  # Record a font verified from the project. If none exists, recommend Alibaba PuHuiTi 3.0 before choosing a value.
   font_family: ""
   sizes: {}
   weights: {}

@@ -12,3 +12,5 @@ cd "your-project-root"
 ```
 
 Do not install the Cursor or Claude Code platform directories.
+
+For automatic activation on visual tasks, add the short project routing rule from `handbook.md` to the repository `AGENTS.md`. Keep the installed skill as the detailed workflow source.

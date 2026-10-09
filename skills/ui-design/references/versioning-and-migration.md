@@ -10,7 +10,7 @@ The skill release and the project asset schema are versioned separately. The com
 manifestVersion: 1
 skill:
   name: UI-Design-Skill
-  version: 0.6.0
+  version: 0.6.1
 uiAssetSchemaVersion: 1
 projectMode: hybrid
 defaultTheme: admin

@@ -1,4 +1,4 @@
-# UI-Design-Skill v0.6.0 手册
+# UI-Design-Skill v0.6.1 手册
 
 本手册说明如何把技能接入真实项目，以及如何持续维护。升级技能、升级资产结构、实现页面是三件独立的事，任何一件都不会自动触发另外两件。
 
@@ -8,7 +8,7 @@
 
 | 版本 | 维护位置 | 含义 |
 |---|---|---|
-| Skill 发布版本 | `skills/ui-design/VERSION` | 通用规则版本，例如 `0.6.0` |
+| Skill 发布版本 | `skills/ui-design/VERSION` | 通用规则版本，例如 `0.6.1` |
 | UI 资产结构 | `ui-design/manifest.yaml` | 项目资产结构版本，例如 `1` |
 | 组件库 | 前端 `package.json` | 依赖版本，例如 Element Plus |
 
@@ -19,6 +19,7 @@ project/
 ├── .agents/skills/ui-design/       # Codex
 ├── .cursor/rules/ui-design.mdc     # Cursor entry
 ├── .cursor/skills/ui-design/       # Cursor
+├── .claude/skills/ui-design/       # Claude Code
 ├── ui-design/
 │   ├── manifest.yaml
 │   ├── design-token.yaml
@@ -40,11 +41,22 @@ PowerShell 的工作目录必须是项目根目录。使用本仓库中的安装
 cd "D:\Projects\my-project"
 & "D:\Tools\UI-Design-Skill\scripts\install-cursor.ps1"
 & "D:\Tools\UI-Design-Skill\scripts\install-codex.ps1"
+& "D:\Tools\UI-Design-Skill\scripts\install-claude.ps1"
 ```
 
 脚本只复制所选平台的技能和规则文件。它们不会创建或修改项目的 `ui-design/` 资产，也不会修改应用代码。
 
 WorkBuddy Desktop 请将 `skills/ui-design/` 打包为 ZIP，从 **专家 · 技能 · 连接器** → **技能** → **添加技能** → **上传技能** 导入。参见 [`platforms/WorkBuddy/install.md`](platforms/WorkBuddy/install.md)。导入由 WorkBuddy 管理，不使用 Codex 或 Cursor 的安装脚本。
+
+### 自动触发规则
+
+为避免每次都要求用户点名技能，在项目根 `AGENTS.md` 或 Claude Code 的 `CLAUDE.md` 中增加一条短路由规则。详细流程仍由已安装技能提供：
+
+```markdown
+For any task that creates or changes visible UI—including layout, styles, component appearance, forms, tables, charts, menus, dialogs, or responsive behavior—automatically use the installed `ui-design` skill, even if the user does not name it. Do not load it for API- or business-logic-only changes.
+```
+
+工具原生技能目录仍需按各自安装指南准备；`AGENTS.md` 负责触发，不能替代技能文件的安装。
 
 更新后请确认：
 
@@ -54,7 +66,7 @@ Get-Content .cursor\skills\ui-design\VERSION
 Get-Content ui-design\manifest.yaml
 ```
 
-两处技能版本必须一致。Cursor 与 Codex 的入口必须指向同一技能发布版本。项目资产版本单独维护。
+所有已安装平台副本的 `VERSION` 必须与本次发布标签一致。Cursor、Codex 和 Claude Code 的入口必须指向同一技能发布版本。项目资产版本单独维护。
 
 对于已有项目，安装脚本不会修改 manifest。确认两处新安装的 `VERSION` 都是预期发布版本后，只更新 `ui-design/manifest.yaml` 中的 `skill.version`。其余项目资产保持不变。如果结构格式也变了，再按迁移说明更新 `uiAssetSchemaVersion`。
 

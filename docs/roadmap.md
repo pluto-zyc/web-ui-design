@@ -1,5 +1,11 @@
 # Roadmap
 
+## v0.6.1
+
+- Clarify automatic skill activation for visible UI changes.
+- Add Claude Code project-local installation scripts and align platform guidance.
+- Fix duplicate typography field in the Design Token template.
+
 ## v0.6.0
 
 - Recommend Alibaba PuHuiTi 3.0 as the primary typeface when no font is specified.

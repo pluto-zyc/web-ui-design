@@ -1,4 +1,4 @@
-# UI-Design-Skill v0.6.0
+# UI-Design-Skill v0.6.1
 
 > Bring the project's existing component library, UI assets, and project profile into reference-driven page development, and keep pages and components consistent over time.
 
@@ -17,6 +17,14 @@ Map the component library, project wrappers, and icons
         ↓
 Implement → verify visually in the browser → correct
 ```
+
+Use the skill automatically for any task that changes visible UI, including layout, styles, component appearance, forms, tables, charts, menus, dialogs, or responsive behavior. Do not load it for API- or business-logic-only changes.
+
+## v0.6.1
+
+- Clarify automatic activation for visual UI work across supporting agents.
+- Add a project-local Claude Code installer and update its onboarding guide.
+- Fix the duplicate typography key in the Design Token template.
 
 ## v0.6.0
 
@@ -52,4 +60,4 @@ ui-design/
 
 Install from `handbook.md`. When upgrading an existing project, inspect the current assets and migrate only what the schema change requires. Updating skill rules alone does not require regenerating pages.
 
-See `skills/ui-design/SKILL.md` and `skills/ui-design/references/` for the detailed rules. Cursor onboarding is in `docs/cursor-onboarding.md`.
+See `skills/ui-design/SKILL.md` and `skills/ui-design/references/` for the detailed rules. Platform onboarding is in `platforms/` and the project workflow is in `handbook.md`.

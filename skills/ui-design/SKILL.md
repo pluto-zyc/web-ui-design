@@ -1,11 +1,13 @@
 ---
 name: ui-design
-description: Use when creating or updating interface pages from references or product requirements. Detect and preserve project UI assets, prioritize the installed component library and registered wrappers, model page structure before implementation, then visually verify the result.
+description: Use whenever a task creates or changes a user-facing interface, including page layout, visual styles, component appearance, forms, tables, charts, menus, dialogs, or responsive behavior. Also use for reference- or requirement-driven UI work. Do not load for API- or business-logic-only changes.
 ---
 
-# UI Design Skill v0.6.0
+# UI Design Skill v0.6.1
 
 Use the current frontend project as the source of truth. The skill release, project asset format, component-library release, and page implementation are separate concerns. Updating this skill does not authorize reinitializing or rewriting existing project assets or pages.
+
+Invoke this skill automatically for visual UI changes even when the user does not name the skill. Do not invoke it for changes limited to APIs, data access, or business logic with no user-facing UI impact.
 
 ## Required workflow
 

@@ -1,6 +1,6 @@
 # Architecture
 
-v0.6.0 is split into generic capability, platform entry points, long-lived project assets, and page assets.
+v0.6.1 is split into generic capability, platform entry points, long-lived project assets, and page assets.
 
 ## Generic layer and platform layer
 

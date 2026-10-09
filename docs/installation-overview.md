@@ -20,7 +20,12 @@ cd "project-root"
 
 ## Claude Code
 
-Installs `.claude/skills/ui-design/`. Copy `skills/ui-design/` into the matching project path.
+Installs `.claude/skills/ui-design/`.
+
+```powershell
+cd "project-root"
+& "path\UI-Design-Skill\scripts\install-claude.ps1"
+```
 
 ## WorkBuddy Desktop
 
@@ -32,4 +37,4 @@ Copy `skills/ui-design/` into the workspace specification directory, and tell th
 
 ## Installation boundary
 
-Cursor and Codex install and upgrade only platform rules and skill files. They do not generate or overwrite `ui-design/manifest.yaml`, Design Tokens, the Component Registry, Page Schemas, or frontend code. After installation, compare the platform `VERSION` with the skill version recorded in the project manifest.
+Cursor, Codex, and Claude Code install and upgrade only platform rules and skill files. They do not generate or overwrite `ui-design/manifest.yaml`, Design Tokens, the Component Registry, Page Schemas, or frontend code. After installation, compare the platform `VERSION` with the skill version recorded in the project manifest.
